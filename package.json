@@ -1,6 +1,6 @@
 {
   "name": "cdk-glue-job-builder",
-  "description": "This is a construct library that allows you to build Job Scripts like Glue Studio.",
+  "description": "This is a construct library that allows you to build Glue Job Scripts like Glue Studio.",
   "repository": {
     "type": "git",
     "url": "https://github.com/WinterYukky/cdk-glue-job-builder.git"
