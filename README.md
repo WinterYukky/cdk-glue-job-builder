@@ -1,4 +1,4 @@
-# Glue Job Builder
+# CDK Glue Job Builder
 
 A construct library that builds Glue Job Script as if it were Glue Studio.
 
