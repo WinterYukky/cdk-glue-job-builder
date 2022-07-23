@@ -1,6 +1,6 @@
 # Glue Job Builder
 
-This is a construct library that allows you to build Glue Job Scripts like Glue Studio.
+A construct library that builds Glue Job Script as if it were Glue Studio.
 
 ## Install
 
