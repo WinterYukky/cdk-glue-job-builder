@@ -3,6 +3,97 @@
 
 ## Structs <a name="Structs" id="Structs"></a>
 
+### ApplyMappingField <a name="ApplyMappingField" id="cdk-glue-job-builder.ApplyMappingField"></a>
+
+Apply Mapping field.
+
+#### Initializer <a name="Initializer" id="cdk-glue-job-builder.ApplyMappingField.Initializer"></a>
+
+```typescript
+import { ApplyMappingField } from 'cdk-glue-job-builder'
+
+const applyMappingField: ApplyMappingField = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#cdk-glue-job-builder.ApplyMappingField.property.source">source</a></code> | <code>@aws-cdk/aws-glue-alpha.Column</code> | Source field. |
+| <code><a href="#cdk-glue-job-builder.ApplyMappingField.property.target">target</a></code> | <code>@aws-cdk/aws-glue-alpha.Column</code> | Target field. |
+
+---
+
+##### `source`<sup>Required</sup> <a name="source" id="cdk-glue-job-builder.ApplyMappingField.property.source"></a>
+
+```typescript
+public readonly source: Column;
+```
+
+- *Type:* @aws-cdk/aws-glue-alpha.Column
+
+Source field.
+
+---
+
+##### `target`<sup>Required</sup> <a name="target" id="cdk-glue-job-builder.ApplyMappingField.property.target"></a>
+
+```typescript
+public readonly target: Column;
+```
+
+- *Type:* @aws-cdk/aws-glue-alpha.Column
+
+Target field.
+
+---
+
+### ApplyMappingProps <a name="ApplyMappingProps" id="cdk-glue-job-builder.ApplyMappingProps"></a>
+
+Props of ApplyMapping.
+
+#### Initializer <a name="Initializer" id="cdk-glue-job-builder.ApplyMappingProps.Initializer"></a>
+
+```typescript
+import { ApplyMappingProps } from 'cdk-glue-job-builder'
+
+const applyMappingProps: ApplyMappingProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#cdk-glue-job-builder.ApplyMappingProps.property.mappings">mappings</a></code> | <code><a href="#cdk-glue-job-builder.ApplyMappingField">ApplyMappingField</a>[]</code> | Field you want to select. |
+| <code><a href="#cdk-glue-job-builder.ApplyMappingProps.property.name">name</a></code> | <code>string</code> | Name of node. |
+
+---
+
+##### `mappings`<sup>Required</sup> <a name="mappings" id="cdk-glue-job-builder.ApplyMappingProps.property.mappings"></a>
+
+```typescript
+public readonly mappings: ApplyMappingField[];
+```
+
+- *Type:* <a href="#cdk-glue-job-builder.ApplyMappingField">ApplyMappingField</a>[]
+
+Field you want to select.
+
+---
+
+##### `name`<sup>Optional</sup> <a name="name" id="cdk-glue-job-builder.ApplyMappingProps.property.name"></a>
+
+```typescript
+public readonly name: string;
+```
+
+- *Type:* string
+- *Default:* 'Apply Mapping'
+
+Name of node.
+
+---
+
 ### CatalogSourceProps <a name="CatalogSourceProps" id="cdk-glue-job-builder.CatalogSourceProps"></a>
 
 Props of CatalogSource.
@@ -390,7 +481,228 @@ The name of your data source.
 
 ---
 
+### SelectFieldsProps <a name="SelectFieldsProps" id="cdk-glue-job-builder.SelectFieldsProps"></a>
+
+Props of SelectFields.
+
+#### Initializer <a name="Initializer" id="cdk-glue-job-builder.SelectFieldsProps.Initializer"></a>
+
+```typescript
+import { SelectFieldsProps } from 'cdk-glue-job-builder'
+
+const selectFieldsProps: SelectFieldsProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#cdk-glue-job-builder.SelectFieldsProps.property.fields">fields</a></code> | <code>string[]</code> | Field you want to select. |
+| <code><a href="#cdk-glue-job-builder.SelectFieldsProps.property.name">name</a></code> | <code>string</code> | Name of node. |
+
+---
+
+##### `fields`<sup>Required</sup> <a name="fields" id="cdk-glue-job-builder.SelectFieldsProps.property.fields"></a>
+
+```typescript
+public readonly fields: string[];
+```
+
+- *Type:* string[]
+
+Field you want to select.
+
+---
+
+##### `name`<sup>Optional</sup> <a name="name" id="cdk-glue-job-builder.SelectFieldsProps.property.name"></a>
+
+```typescript
+public readonly name: string;
+```
+
+- *Type:* string
+- *Default:* 'Select Fields'
+
+Name of node.
+
+---
+
 ## Classes <a name="Classes" id="Classes"></a>
+
+### ApplyMapping <a name="ApplyMapping" id="cdk-glue-job-builder.ApplyMapping"></a>
+
+Transform of Apply Mapping.
+
+#### Initializers <a name="Initializers" id="cdk-glue-job-builder.ApplyMapping.Initializer"></a>
+
+```typescript
+import { ApplyMapping } from 'cdk-glue-job-builder'
+
+new ApplyMapping(id: string, props: ApplyMappingProps)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#cdk-glue-job-builder.ApplyMapping.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#cdk-glue-job-builder.ApplyMapping.Initializer.parameter.props">props</a></code> | <code><a href="#cdk-glue-job-builder.ApplyMappingProps">ApplyMappingProps</a></code> | *No description.* |
+
+---
+
+##### `id`<sup>Required</sup> <a name="id" id="cdk-glue-job-builder.ApplyMapping.Initializer.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+##### `props`<sup>Required</sup> <a name="props" id="cdk-glue-job-builder.ApplyMapping.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#cdk-glue-job-builder.ApplyMappingProps">ApplyMappingProps</a>
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#cdk-glue-job-builder.ApplyMapping.from">from</a></code> | Chain from previous node. |
+| <code><a href="#cdk-glue-job-builder.ApplyMapping.grant">grant</a></code> | Granting Glue job permissions. |
+| <code><a href="#cdk-glue-job-builder.ApplyMapping.python">python</a></code> | Build Python code fragment. |
+| <code><a href="#cdk-glue-job-builder.ApplyMapping.scala">scala</a></code> | Build Scala code fragment. |
+| <code><a href="#cdk-glue-job-builder.ApplyMapping.to">to</a></code> | Chain to the next node. |
+
+---
+
+##### `from` <a name="from" id="cdk-glue-job-builder.ApplyMapping.from"></a>
+
+```typescript
+public from(node: INode): INode
+```
+
+Chain from previous node.
+
+###### `node`<sup>Required</sup> <a name="node" id="cdk-glue-job-builder.ApplyMapping.from.parameter.node"></a>
+
+- *Type:* <a href="#cdk-glue-job-builder.INode">INode</a>
+
+---
+
+##### `grant` <a name="grant" id="cdk-glue-job-builder.ApplyMapping.grant"></a>
+
+```typescript
+public grant(_grantee: IGrantable): Grant
+```
+
+Granting Glue job permissions.
+
+###### `_grantee`<sup>Required</sup> <a name="_grantee" id="cdk-glue-job-builder.ApplyMapping.grant.parameter._grantee"></a>
+
+- *Type:* aws-cdk-lib.aws_iam.IGrantable
+
+---
+
+##### `python` <a name="python" id="cdk-glue-job-builder.ApplyMapping.python"></a>
+
+```typescript
+public python(): CodeFragment
+```
+
+Build Python code fragment.
+
+##### `scala` <a name="scala" id="cdk-glue-job-builder.ApplyMapping.scala"></a>
+
+```typescript
+public scala(): CodeFragment
+```
+
+Build Scala code fragment.
+
+##### `to` <a name="to" id="cdk-glue-job-builder.ApplyMapping.to"></a>
+
+```typescript
+public to(node: INode): INode
+```
+
+Chain to the next node.
+
+###### `node`<sup>Required</sup> <a name="node" id="cdk-glue-job-builder.ApplyMapping.to.parameter.node"></a>
+
+- *Type:* <a href="#cdk-glue-job-builder.INode">INode</a>
+
+---
+
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#cdk-glue-job-builder.ApplyMapping.property.inputs">inputs</a></code> | <code><a href="#cdk-glue-job-builder.INode">INode</a>[]</code> | Input nodes (i.e parent nodes). |
+| <code><a href="#cdk-glue-job-builder.ApplyMapping.property.name">name</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#cdk-glue-job-builder.ApplyMapping.property.nodeId">nodeId</a></code> | <code>string</code> | ID of node. |
+| <code><a href="#cdk-glue-job-builder.ApplyMapping.property.outputs">outputs</a></code> | <code><a href="#cdk-glue-job-builder.INode">INode</a>[]</code> | Output nodes (i.e child nodes). |
+| <code><a href="#cdk-glue-job-builder.ApplyMapping.property.generation">generation</a></code> | <code>number</code> | Generation of node. |
+
+---
+
+##### `inputs`<sup>Required</sup> <a name="inputs" id="cdk-glue-job-builder.ApplyMapping.property.inputs"></a>
+
+```typescript
+public readonly inputs: INode[];
+```
+
+- *Type:* <a href="#cdk-glue-job-builder.INode">INode</a>[]
+
+Input nodes (i.e parent nodes).
+
+---
+
+##### `name`<sup>Required</sup> <a name="name" id="cdk-glue-job-builder.ApplyMapping.property.name"></a>
+
+```typescript
+public readonly name: string;
+```
+
+- *Type:* string
+
+---
+
+##### `nodeId`<sup>Required</sup> <a name="nodeId" id="cdk-glue-job-builder.ApplyMapping.property.nodeId"></a>
+
+```typescript
+public readonly nodeId: string;
+```
+
+- *Type:* string
+
+ID of node.
+
+---
+
+##### `outputs`<sup>Required</sup> <a name="outputs" id="cdk-glue-job-builder.ApplyMapping.property.outputs"></a>
+
+```typescript
+public readonly outputs: INode[];
+```
+
+- *Type:* <a href="#cdk-glue-job-builder.INode">INode</a>[]
+
+Output nodes (i.e child nodes).
+
+---
+
+##### `generation`<sup>Required</sup> <a name="generation" id="cdk-glue-job-builder.ApplyMapping.property.generation"></a>
+
+```typescript
+public readonly generation: number;
+```
+
+- *Type:* number
+
+Generation of node.
+
+Generation of node.
+
+---
+
 
 ### CatalogSource <a name="CatalogSource" id="cdk-glue-job-builder.CatalogSource"></a>
 
@@ -2197,6 +2509,181 @@ The object key.
 
 
 
+### SelectFields <a name="SelectFields" id="cdk-glue-job-builder.SelectFields"></a>
+
+Transform of Select Fields.
+
+#### Initializers <a name="Initializers" id="cdk-glue-job-builder.SelectFields.Initializer"></a>
+
+```typescript
+import { SelectFields } from 'cdk-glue-job-builder'
+
+new SelectFields(id: string, props: SelectFieldsProps)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#cdk-glue-job-builder.SelectFields.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#cdk-glue-job-builder.SelectFields.Initializer.parameter.props">props</a></code> | <code><a href="#cdk-glue-job-builder.SelectFieldsProps">SelectFieldsProps</a></code> | *No description.* |
+
+---
+
+##### `id`<sup>Required</sup> <a name="id" id="cdk-glue-job-builder.SelectFields.Initializer.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+##### `props`<sup>Required</sup> <a name="props" id="cdk-glue-job-builder.SelectFields.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#cdk-glue-job-builder.SelectFieldsProps">SelectFieldsProps</a>
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#cdk-glue-job-builder.SelectFields.from">from</a></code> | Chain from previous node. |
+| <code><a href="#cdk-glue-job-builder.SelectFields.grant">grant</a></code> | Granting Glue job permissions. |
+| <code><a href="#cdk-glue-job-builder.SelectFields.python">python</a></code> | Build Python code fragment. |
+| <code><a href="#cdk-glue-job-builder.SelectFields.scala">scala</a></code> | Build Scala code fragment. |
+| <code><a href="#cdk-glue-job-builder.SelectFields.to">to</a></code> | Chain to the next node. |
+
+---
+
+##### `from` <a name="from" id="cdk-glue-job-builder.SelectFields.from"></a>
+
+```typescript
+public from(node: INode): INode
+```
+
+Chain from previous node.
+
+###### `node`<sup>Required</sup> <a name="node" id="cdk-glue-job-builder.SelectFields.from.parameter.node"></a>
+
+- *Type:* <a href="#cdk-glue-job-builder.INode">INode</a>
+
+---
+
+##### `grant` <a name="grant" id="cdk-glue-job-builder.SelectFields.grant"></a>
+
+```typescript
+public grant(_grantee: IGrantable): Grant
+```
+
+Granting Glue job permissions.
+
+###### `_grantee`<sup>Required</sup> <a name="_grantee" id="cdk-glue-job-builder.SelectFields.grant.parameter._grantee"></a>
+
+- *Type:* aws-cdk-lib.aws_iam.IGrantable
+
+---
+
+##### `python` <a name="python" id="cdk-glue-job-builder.SelectFields.python"></a>
+
+```typescript
+public python(): CodeFragment
+```
+
+Build Python code fragment.
+
+##### `scala` <a name="scala" id="cdk-glue-job-builder.SelectFields.scala"></a>
+
+```typescript
+public scala(): CodeFragment
+```
+
+Build Scala code fragment.
+
+##### `to` <a name="to" id="cdk-glue-job-builder.SelectFields.to"></a>
+
+```typescript
+public to(node: INode): INode
+```
+
+Chain to the next node.
+
+###### `node`<sup>Required</sup> <a name="node" id="cdk-glue-job-builder.SelectFields.to.parameter.node"></a>
+
+- *Type:* <a href="#cdk-glue-job-builder.INode">INode</a>
+
+---
+
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#cdk-glue-job-builder.SelectFields.property.inputs">inputs</a></code> | <code><a href="#cdk-glue-job-builder.INode">INode</a>[]</code> | Input nodes (i.e parent nodes). |
+| <code><a href="#cdk-glue-job-builder.SelectFields.property.name">name</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#cdk-glue-job-builder.SelectFields.property.nodeId">nodeId</a></code> | <code>string</code> | ID of node. |
+| <code><a href="#cdk-glue-job-builder.SelectFields.property.outputs">outputs</a></code> | <code><a href="#cdk-glue-job-builder.INode">INode</a>[]</code> | Output nodes (i.e child nodes). |
+| <code><a href="#cdk-glue-job-builder.SelectFields.property.generation">generation</a></code> | <code>number</code> | Generation of node. |
+
+---
+
+##### `inputs`<sup>Required</sup> <a name="inputs" id="cdk-glue-job-builder.SelectFields.property.inputs"></a>
+
+```typescript
+public readonly inputs: INode[];
+```
+
+- *Type:* <a href="#cdk-glue-job-builder.INode">INode</a>[]
+
+Input nodes (i.e parent nodes).
+
+---
+
+##### `name`<sup>Required</sup> <a name="name" id="cdk-glue-job-builder.SelectFields.property.name"></a>
+
+```typescript
+public readonly name: string;
+```
+
+- *Type:* string
+
+---
+
+##### `nodeId`<sup>Required</sup> <a name="nodeId" id="cdk-glue-job-builder.SelectFields.property.nodeId"></a>
+
+```typescript
+public readonly nodeId: string;
+```
+
+- *Type:* string
+
+ID of node.
+
+---
+
+##### `outputs`<sup>Required</sup> <a name="outputs" id="cdk-glue-job-builder.SelectFields.property.outputs"></a>
+
+```typescript
+public readonly outputs: INode[];
+```
+
+- *Type:* <a href="#cdk-glue-job-builder.INode">INode</a>[]
+
+Output nodes (i.e child nodes).
+
+---
+
+##### `generation`<sup>Required</sup> <a name="generation" id="cdk-glue-job-builder.SelectFields.property.generation"></a>
+
+```typescript
+public readonly generation: number;
+```
+
+- *Type:* number
+
+Generation of node.
+
+Generation of node.
+
+---
+
+
 ### Transform <a name="Transform" id="cdk-glue-job-builder.Transform"></a>
 
 Transforms.
@@ -2219,7 +2706,31 @@ new Transform()
 
 | **Name** | **Description** |
 | --- | --- |
+| <code><a href="#cdk-glue-job-builder.Transform.applyMapping">applyMapping</a></code> | Create a new {@link ApplyMapping}. |
 | <code><a href="#cdk-glue-job-builder.Transform.dropFields">dropFields</a></code> | Create a new {@link DropFields}. |
+| <code><a href="#cdk-glue-job-builder.Transform.selectFields">selectFields</a></code> | Create a new {@link SelectFields}. |
+
+---
+
+##### `applyMapping` <a name="applyMapping" id="cdk-glue-job-builder.Transform.applyMapping"></a>
+
+```typescript
+import { Transform } from 'cdk-glue-job-builder'
+
+Transform.applyMapping(id: string, props: ApplyMappingProps)
+```
+
+Create a new {@link ApplyMapping}.
+
+###### `id`<sup>Required</sup> <a name="id" id="cdk-glue-job-builder.Transform.applyMapping.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+###### `props`<sup>Required</sup> <a name="props" id="cdk-glue-job-builder.Transform.applyMapping.parameter.props"></a>
+
+- *Type:* <a href="#cdk-glue-job-builder.ApplyMappingProps">ApplyMappingProps</a>
 
 ---
 
@@ -2228,12 +2739,12 @@ new Transform()
 ```typescript
 import { Transform } from 'cdk-glue-job-builder'
 
-Transform.dropFields(nodeId: string, props: DropFieldsProps)
+Transform.dropFields(id: string, props: DropFieldsProps)
 ```
 
 Create a new {@link DropFields}.
 
-###### `nodeId`<sup>Required</sup> <a name="nodeId" id="cdk-glue-job-builder.Transform.dropFields.parameter.nodeId"></a>
+###### `id`<sup>Required</sup> <a name="id" id="cdk-glue-job-builder.Transform.dropFields.parameter.id"></a>
 
 - *Type:* string
 
@@ -2242,6 +2753,28 @@ Create a new {@link DropFields}.
 ###### `props`<sup>Required</sup> <a name="props" id="cdk-glue-job-builder.Transform.dropFields.parameter.props"></a>
 
 - *Type:* <a href="#cdk-glue-job-builder.DropFieldsProps">DropFieldsProps</a>
+
+---
+
+##### `selectFields` <a name="selectFields" id="cdk-glue-job-builder.Transform.selectFields"></a>
+
+```typescript
+import { Transform } from 'cdk-glue-job-builder'
+
+Transform.selectFields(id: string, props: SelectFieldsProps)
+```
+
+Create a new {@link SelectFields}.
+
+###### `id`<sup>Required</sup> <a name="id" id="cdk-glue-job-builder.Transform.selectFields.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+###### `props`<sup>Required</sup> <a name="props" id="cdk-glue-job-builder.Transform.selectFields.parameter.props"></a>
+
+- *Type:* <a href="#cdk-glue-job-builder.SelectFieldsProps">SelectFieldsProps</a>
 
 ---
 
@@ -2282,7 +2815,7 @@ The Glue job.
 
 ### INode <a name="INode" id="cdk-glue-job-builder.INode"></a>
 
-- *Implemented By:* <a href="#cdk-glue-job-builder.CatalogSource">CatalogSource</a>, <a href="#cdk-glue-job-builder.CatalogTarget">CatalogTarget</a>, <a href="#cdk-glue-job-builder.DropFields">DropFields</a>, <a href="#cdk-glue-job-builder.NodeBase">NodeBase</a>, <a href="#cdk-glue-job-builder.S3CatalogSource">S3CatalogSource</a>, <a href="#cdk-glue-job-builder.S3CatalogTarget">S3CatalogTarget</a>, <a href="#cdk-glue-job-builder.INode">INode</a>
+- *Implemented By:* <a href="#cdk-glue-job-builder.ApplyMapping">ApplyMapping</a>, <a href="#cdk-glue-job-builder.CatalogSource">CatalogSource</a>, <a href="#cdk-glue-job-builder.CatalogTarget">CatalogTarget</a>, <a href="#cdk-glue-job-builder.DropFields">DropFields</a>, <a href="#cdk-glue-job-builder.NodeBase">NodeBase</a>, <a href="#cdk-glue-job-builder.S3CatalogSource">S3CatalogSource</a>, <a href="#cdk-glue-job-builder.S3CatalogTarget">S3CatalogTarget</a>, <a href="#cdk-glue-job-builder.SelectFields">SelectFields</a>, <a href="#cdk-glue-job-builder.INode">INode</a>
 
 A node of job.
 
