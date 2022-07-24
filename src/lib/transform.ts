@@ -117,14 +117,14 @@ export class Transform {
   /**
    * Create a new {@link DropFields}.
    */
-  static dropFields(nodeId: string, props: DropFieldsProps) {
-    return new DropFields(nodeId, props);
+  static dropFields(id: string, props: DropFieldsProps) {
+    return new DropFields(id, props);
   }
 
   /**
    * Create a new {@link SelectFields}.
    */
-  static selectFields(nodeId: string, props: SelectFieldsProps) {
-    return new SelectFields(nodeId, props);
+  static selectFields(id: string, props: SelectFieldsProps) {
+    return new SelectFields(id, props);
   }
 }
