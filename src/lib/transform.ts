@@ -115,8 +115,14 @@ export class SelectFields extends NodeBase {
  * Apply Mapping field.
  */
 export interface ApplyMappingField {
-  source: Column;
-  target: Column;
+  /**
+   * Source field.
+   */
+  readonly source: Column;
+  /**
+   * Target field.
+   */
+  readonly target: Column;
 }
 
 /**
