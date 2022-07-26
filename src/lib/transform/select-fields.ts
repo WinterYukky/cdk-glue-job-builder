@@ -11,7 +11,7 @@ export interface SelectFieldsProps {
    */
   readonly fields: string[];
   /**
-   * Name of node.
+   * The node name.
    *
    * @default 'Select Fields'
    */
@@ -19,7 +19,7 @@ export interface SelectFieldsProps {
 }
 
 /**
- * Transform of Select Fields.
+ * Choose which fields you want from your data.
  */
 export class SelectFields extends NodeBase {
   private readonly fields: string[];
@@ -42,16 +42,14 @@ export class SelectFields extends NodeBase {
       `    transformation_ctx="${this.nodeId}",`,
       `)`,
     ].join('\n');
-    const parent = this.inputs[0].python();
     return {
-      imports: parent.imports,
-      body: [...parent.body, code],
+      body: [code],
     };
   }
   scala(): CodeFragment {
     throw new Error('Method not implemented.');
   }
-  grant(_grantee: IGrantable): Grant | undefined {
+  grant(_job: IGrantable): Grant | undefined {
     return undefined;
   }
 }

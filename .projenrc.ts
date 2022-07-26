@@ -24,7 +24,12 @@ const project = new awscdk.AwsCdkConstructLibrary({
   ] /* Runtime dependencies of this module. */,
   description:
     'A construct library that builds Glue Job Script as if it were Glue Studio.' /* The description is just a string that helps people understand the purpose of the package. */,
-  // devDeps: [],             /* Build dependencies for this module. */
+  devDeps: [
+    `@aws-cdk/aws-glue-alpha@${cdkVersion}-alpha.0`,
+    '@types/aws-lambda',
+    'aws-sdk',
+    'esbuild',
+  ] /* Build dependencies for this module. */,
   // packageName: undefined,  /* The "name" in package.json. */
   peerDeps: [`@aws-cdk/aws-glue-alpha@${cdkVersion}-alpha.0`],
 });

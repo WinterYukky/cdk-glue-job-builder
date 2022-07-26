@@ -18,7 +18,7 @@ class DummyCodeNode extends SomeNode {
       body: [`${id}()`],
     });
   }
-  grant(_grantee: IGrantable): Grant | undefined {
+  grant(_job: IGrantable): Grant | undefined {
     return undefined;
   }
 }
@@ -101,7 +101,8 @@ describe('PythonCodeBuilder', () => {
     const node1 = new DummyCodeNode('node1');
     const node2 = new DummyCodeNode('node2');
     const node3 = new DummyCodeNode('node3');
-    const node = node3.to(node2).to(node1);
+    const node4 = new SomeNode('node4');
+    const node = node3.to(node4).to(node2).to(node1);
     const script = CodeBuilder.python(node).codenize();
     expect(script).toBe(`import sys
 from awsglue.transforms import *
@@ -126,7 +127,7 @@ node2()
 
 node1()
 
-job.commit`);
+job.commit()`);
   });
 
   test('Create job is not throw error', () => {

@@ -26,7 +26,7 @@ export interface ApplyMappingProps {
    */
   readonly mappings: ApplyMappingField[];
   /**
-   * Name of node.
+   * The node name.
    *
    * @default 'Apply Mapping'
    */
@@ -34,7 +34,7 @@ export interface ApplyMappingProps {
 }
 
 /**
- * Transform of Apply Mapping.
+ * Map fields to new names and types of your chice.
  */
 export class ApplyMapping extends NodeBase {
   private readonly mappings: ApplyMappingField[];
@@ -72,16 +72,14 @@ export class ApplyMapping extends NodeBase {
       `    transformation_ctx="${this.nodeId}",`,
       `)`,
     ].join('\n');
-    const parent = this.inputs[0].python();
     return {
-      imports: parent.imports,
-      body: [...parent.body, code],
+      body: [code],
     };
   }
   scala(): CodeFragment {
     throw new Error('Method not implemented.');
   }
-  grant(_grantee: IGrantable): Grant | undefined {
+  grant(_job: IGrantable): Grant | undefined {
     return undefined;
   }
 }

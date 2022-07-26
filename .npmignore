@@ -21,5 +21,7 @@ dist
 tsconfig.tsbuildinfo
 /.eslintrc.json
 !.jsii
-test/.tmp
-test/default.integ.snapshot
+test/integ/drop-fields.integ.snapshot
+test/integ/drop-null-fields.integ.snapshot
+test/integ/.tmp
+test/integ/select-fields.integ.snapshot

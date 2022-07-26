@@ -65,7 +65,7 @@ const applyMappingProps: ApplyMappingProps = { ... }
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#cdk-glue-job-builder.ApplyMappingProps.property.mappings">mappings</a></code> | <code><a href="#cdk-glue-job-builder.ApplyMappingField">ApplyMappingField</a>[]</code> | Field you want to select. |
-| <code><a href="#cdk-glue-job-builder.ApplyMappingProps.property.name">name</a></code> | <code>string</code> | Name of node. |
+| <code><a href="#cdk-glue-job-builder.ApplyMappingProps.property.name">name</a></code> | <code>string</code> | The node name. |
 
 ---
 
@@ -90,7 +90,7 @@ public readonly name: string;
 - *Type:* string
 - *Default:* 'Apply Mapping'
 
-Name of node.
+The node name.
 
 ---
 
@@ -258,32 +258,66 @@ const codeFragment: CodeFragment = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#cdk-glue-job-builder.CodeFragment.property.body">body</a></code> | <code>string[]</code> | Body section of CodeFragment. |
+| <code><a href="#cdk-glue-job-builder.CodeFragment.property.body">body</a></code> | <code>string[]</code> | The body is output between the head and tail sections. |
+| <code><a href="#cdk-glue-job-builder.CodeFragment.property.head">head</a></code> | <code>string[]</code> | Set the code to be written between the import section and body. |
 | <code><a href="#cdk-glue-job-builder.CodeFragment.property.imports">imports</a></code> | <code>string[]</code> | Import section of CodeFragment. |
+| <code><a href="#cdk-glue-job-builder.CodeFragment.property.tail">tail</a></code> | <code>string[]</code> | The tail is output just before job.commit(). |
 
 ---
 
-##### `body`<sup>Required</sup> <a name="body" id="cdk-glue-job-builder.CodeFragment.property.body"></a>
+##### `body`<sup>Optional</sup> <a name="body" id="cdk-glue-job-builder.CodeFragment.property.body"></a>
 
 ```typescript
 public readonly body: string[];
 ```
 
 - *Type:* string[]
+- *Default:* No body codes.
 
-Body section of CodeFragment.
+The body is output between the head and tail sections.
+
+The ETL is written here.
 
 ---
 
-##### `imports`<sup>Required</sup> <a name="imports" id="cdk-glue-job-builder.CodeFragment.property.imports"></a>
+##### `head`<sup>Optional</sup> <a name="head" id="cdk-glue-job-builder.CodeFragment.property.head"></a>
+
+```typescript
+public readonly head: string[];
+```
+
+- *Type:* string[]
+- *Default:* No head codes.
+
+Set the code to be written between the import section and body.
+
+Functions must be defined here.
+
+---
+
+##### `imports`<sup>Optional</sup> <a name="imports" id="cdk-glue-job-builder.CodeFragment.property.imports"></a>
 
 ```typescript
 public readonly imports: string[];
 ```
 
 - *Type:* string[]
+- *Default:* No imports.
 
 Import section of CodeFragment.
+
+---
+
+##### `tail`<sup>Optional</sup> <a name="tail" id="cdk-glue-job-builder.CodeFragment.property.tail"></a>
+
+```typescript
+public readonly tail: string[];
+```
+
+- *Type:* string[]
+- *Default:* No tail codes.
+
+The tail is output just before job.commit().
 
 ---
 
@@ -304,7 +338,7 @@ const dropFieldsProps: DropFieldsProps = { ... }
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#cdk-glue-job-builder.DropFieldsProps.property.fields">fields</a></code> | <code>string[]</code> | Field you want to drop. |
-| <code><a href="#cdk-glue-job-builder.DropFieldsProps.property.name">name</a></code> | <code>string</code> | Name of node. |
+| <code><a href="#cdk-glue-job-builder.DropFieldsProps.property.name">name</a></code> | <code>string</code> | The node name. |
 
 ---
 
@@ -329,7 +363,65 @@ public readonly name: string;
 - *Type:* string
 - *Default:* 'Drop Fields'
 
-Name of node.
+The node name.
+
+---
+
+### DropNullFieldsProps <a name="DropNullFieldsProps" id="cdk-glue-job-builder.DropNullFieldsProps"></a>
+
+Props of DropNullFields.
+
+#### Initializer <a name="Initializer" id="cdk-glue-job-builder.DropNullFieldsProps.Initializer"></a>
+
+```typescript
+import { DropNullFieldsProps } from 'cdk-glue-job-builder'
+
+const dropNullFieldsProps: DropNullFieldsProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#cdk-glue-job-builder.DropNullFieldsProps.property.fields">fields</a></code> | <code><a href="#cdk-glue-job-builder.RepresentNullValue">RepresentNullValue</a>[]</code> | Field you want to drop. |
+| <code><a href="#cdk-glue-job-builder.DropNullFieldsProps.property.name">name</a></code> | <code>string</code> | The node name. |
+
+---
+
+##### `fields`<sup>Required</sup> <a name="fields" id="cdk-glue-job-builder.DropNullFieldsProps.property.fields"></a>
+
+```typescript
+public readonly fields: RepresentNullValue[];
+```
+
+- *Type:* <a href="#cdk-glue-job-builder.RepresentNullValue">RepresentNullValue</a>[]
+
+Field you want to drop.
+
+---
+
+*Example*
+
+```typescript
+Transform.dropNullFields({
+ fields: [
+   RepresentNullValue.emptyString(),
+   RepresentNullValue.nullString(),
+ ]
+})
+```
+
+
+##### `name`<sup>Optional</sup> <a name="name" id="cdk-glue-job-builder.DropNullFieldsProps.property.name"></a>
+
+```typescript
+public readonly name: string;
+```
+
+- *Type:* string
+- *Default:* 'Drop Null Fields'
+
+The node name.
 
 ---
 
@@ -498,7 +590,7 @@ const selectFieldsProps: SelectFieldsProps = { ... }
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#cdk-glue-job-builder.SelectFieldsProps.property.fields">fields</a></code> | <code>string[]</code> | Field you want to select. |
-| <code><a href="#cdk-glue-job-builder.SelectFieldsProps.property.name">name</a></code> | <code>string</code> | Name of node. |
+| <code><a href="#cdk-glue-job-builder.SelectFieldsProps.property.name">name</a></code> | <code>string</code> | The node name. |
 
 ---
 
@@ -523,7 +615,7 @@ public readonly name: string;
 - *Type:* string
 - *Default:* 'Select Fields'
 
-Name of node.
+The node name.
 
 ---
 
@@ -531,7 +623,7 @@ Name of node.
 
 ### ApplyMapping <a name="ApplyMapping" id="cdk-glue-job-builder.ApplyMapping"></a>
 
-Transform of Apply Mapping.
+Map fields to new names and types of your chice.
 
 #### Initializers <a name="Initializers" id="cdk-glue-job-builder.ApplyMapping.Initializer"></a>
 
@@ -589,12 +681,12 @@ Chain from previous node.
 ##### `grant` <a name="grant" id="cdk-glue-job-builder.ApplyMapping.grant"></a>
 
 ```typescript
-public grant(_grantee: IGrantable): Grant
+public grant(_job: IGrantable): Grant
 ```
 
 Granting Glue job permissions.
 
-###### `_grantee`<sup>Required</sup> <a name="_grantee" id="cdk-glue-job-builder.ApplyMapping.grant.parameter._grantee"></a>
+###### `_job`<sup>Required</sup> <a name="_job" id="cdk-glue-job-builder.ApplyMapping.grant.parameter._job"></a>
 
 - *Type:* aws-cdk-lib.aws_iam.IGrantable
 
@@ -1481,7 +1573,7 @@ Create a new {@link S3CatalogTarget}.
 
 ### DropFields <a name="DropFields" id="cdk-glue-job-builder.DropFields"></a>
 
-Transform of Drop Fields.
+Remove selected fields from your data.
 
 #### Initializers <a name="Initializers" id="cdk-glue-job-builder.DropFields.Initializer"></a>
 
@@ -1539,12 +1631,12 @@ Chain from previous node.
 ##### `grant` <a name="grant" id="cdk-glue-job-builder.DropFields.grant"></a>
 
 ```typescript
-public grant(_grantee: IGrantable): Grant
+public grant(_job: IGrantable): Grant
 ```
 
 Granting Glue job permissions.
 
-###### `_grantee`<sup>Required</sup> <a name="_grantee" id="cdk-glue-job-builder.DropFields.grant.parameter._grantee"></a>
+###### `_job`<sup>Required</sup> <a name="_job" id="cdk-glue-job-builder.DropFields.grant.parameter._job"></a>
 
 - *Type:* aws-cdk-lib.aws_iam.IGrantable
 
@@ -1640,6 +1732,181 @@ Output nodes (i.e child nodes).
 ---
 
 ##### `generation`<sup>Required</sup> <a name="generation" id="cdk-glue-job-builder.DropFields.property.generation"></a>
+
+```typescript
+public readonly generation: number;
+```
+
+- *Type:* number
+
+Generation of node.
+
+Generation of node.
+
+---
+
+
+### DropNullFields <a name="DropNullFields" id="cdk-glue-job-builder.DropNullFields"></a>
+
+Remove fields or columns where all the values are the null objects.
+
+#### Initializers <a name="Initializers" id="cdk-glue-job-builder.DropNullFields.Initializer"></a>
+
+```typescript
+import { DropNullFields } from 'cdk-glue-job-builder'
+
+new DropNullFields(id: string, props: DropNullFieldsProps)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#cdk-glue-job-builder.DropNullFields.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#cdk-glue-job-builder.DropNullFields.Initializer.parameter.props">props</a></code> | <code><a href="#cdk-glue-job-builder.DropNullFieldsProps">DropNullFieldsProps</a></code> | *No description.* |
+
+---
+
+##### `id`<sup>Required</sup> <a name="id" id="cdk-glue-job-builder.DropNullFields.Initializer.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+##### `props`<sup>Required</sup> <a name="props" id="cdk-glue-job-builder.DropNullFields.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#cdk-glue-job-builder.DropNullFieldsProps">DropNullFieldsProps</a>
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#cdk-glue-job-builder.DropNullFields.from">from</a></code> | Chain from previous node. |
+| <code><a href="#cdk-glue-job-builder.DropNullFields.grant">grant</a></code> | Granting Glue job permissions. |
+| <code><a href="#cdk-glue-job-builder.DropNullFields.python">python</a></code> | Build Python code fragment. |
+| <code><a href="#cdk-glue-job-builder.DropNullFields.scala">scala</a></code> | Build Scala code fragment. |
+| <code><a href="#cdk-glue-job-builder.DropNullFields.to">to</a></code> | Chain to the next node. |
+
+---
+
+##### `from` <a name="from" id="cdk-glue-job-builder.DropNullFields.from"></a>
+
+```typescript
+public from(node: INode): INode
+```
+
+Chain from previous node.
+
+###### `node`<sup>Required</sup> <a name="node" id="cdk-glue-job-builder.DropNullFields.from.parameter.node"></a>
+
+- *Type:* <a href="#cdk-glue-job-builder.INode">INode</a>
+
+---
+
+##### `grant` <a name="grant" id="cdk-glue-job-builder.DropNullFields.grant"></a>
+
+```typescript
+public grant(_job: IGrantable): Grant
+```
+
+Granting Glue job permissions.
+
+###### `_job`<sup>Required</sup> <a name="_job" id="cdk-glue-job-builder.DropNullFields.grant.parameter._job"></a>
+
+- *Type:* aws-cdk-lib.aws_iam.IGrantable
+
+---
+
+##### `python` <a name="python" id="cdk-glue-job-builder.DropNullFields.python"></a>
+
+```typescript
+public python(): CodeFragment
+```
+
+Build Python code fragment.
+
+##### `scala` <a name="scala" id="cdk-glue-job-builder.DropNullFields.scala"></a>
+
+```typescript
+public scala(): CodeFragment
+```
+
+Build Scala code fragment.
+
+##### `to` <a name="to" id="cdk-glue-job-builder.DropNullFields.to"></a>
+
+```typescript
+public to(node: INode): INode
+```
+
+Chain to the next node.
+
+###### `node`<sup>Required</sup> <a name="node" id="cdk-glue-job-builder.DropNullFields.to.parameter.node"></a>
+
+- *Type:* <a href="#cdk-glue-job-builder.INode">INode</a>
+
+---
+
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#cdk-glue-job-builder.DropNullFields.property.inputs">inputs</a></code> | <code><a href="#cdk-glue-job-builder.INode">INode</a>[]</code> | Input nodes (i.e parent nodes). |
+| <code><a href="#cdk-glue-job-builder.DropNullFields.property.name">name</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#cdk-glue-job-builder.DropNullFields.property.nodeId">nodeId</a></code> | <code>string</code> | ID of node. |
+| <code><a href="#cdk-glue-job-builder.DropNullFields.property.outputs">outputs</a></code> | <code><a href="#cdk-glue-job-builder.INode">INode</a>[]</code> | Output nodes (i.e child nodes). |
+| <code><a href="#cdk-glue-job-builder.DropNullFields.property.generation">generation</a></code> | <code>number</code> | Generation of node. |
+
+---
+
+##### `inputs`<sup>Required</sup> <a name="inputs" id="cdk-glue-job-builder.DropNullFields.property.inputs"></a>
+
+```typescript
+public readonly inputs: INode[];
+```
+
+- *Type:* <a href="#cdk-glue-job-builder.INode">INode</a>[]
+
+Input nodes (i.e parent nodes).
+
+---
+
+##### `name`<sup>Required</sup> <a name="name" id="cdk-glue-job-builder.DropNullFields.property.name"></a>
+
+```typescript
+public readonly name: string;
+```
+
+- *Type:* string
+
+---
+
+##### `nodeId`<sup>Required</sup> <a name="nodeId" id="cdk-glue-job-builder.DropNullFields.property.nodeId"></a>
+
+```typescript
+public readonly nodeId: string;
+```
+
+- *Type:* string
+
+ID of node.
+
+---
+
+##### `outputs`<sup>Required</sup> <a name="outputs" id="cdk-glue-job-builder.DropNullFields.property.outputs"></a>
+
+```typescript
+public readonly outputs: INode[];
+```
+
+- *Type:* <a href="#cdk-glue-job-builder.INode">INode</a>[]
+
+Output nodes (i.e child nodes).
+
+---
+
+##### `generation`<sup>Required</sup> <a name="generation" id="cdk-glue-job-builder.DropNullFields.property.generation"></a>
 
 ```typescript
 public readonly generation: number;
@@ -1971,6 +2238,117 @@ The object key.
 
 ---
 
+
+
+### RepresentNullValue <a name="RepresentNullValue" id="cdk-glue-job-builder.RepresentNullValue"></a>
+
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#cdk-glue-job-builder.RepresentNullValue.emptyString">emptyString</a></code> | Empty String ("" or ''). |
+| <code><a href="#cdk-glue-job-builder.RepresentNullValue.integer">integer</a></code> | Create a new {@link RepresentNullValue} from number value. |
+| <code><a href="#cdk-glue-job-builder.RepresentNullValue.minusOne">minusOne</a></code> | -1 Integer. |
+| <code><a href="#cdk-glue-job-builder.RepresentNullValue.nullString">nullString</a></code> | "null" String. |
+| <code><a href="#cdk-glue-job-builder.RepresentNullValue.string">string</a></code> | Create a new {@link RepresentNullValue} from string value. |
+
+---
+
+##### `emptyString` <a name="emptyString" id="cdk-glue-job-builder.RepresentNullValue.emptyString"></a>
+
+```typescript
+import { RepresentNullValue } from 'cdk-glue-job-builder'
+
+RepresentNullValue.emptyString()
+```
+
+Empty String ("" or '').
+
+##### `integer` <a name="integer" id="cdk-glue-job-builder.RepresentNullValue.integer"></a>
+
+```typescript
+import { RepresentNullValue } from 'cdk-glue-job-builder'
+
+RepresentNullValue.integer(value: number)
+```
+
+Create a new {@link RepresentNullValue} from number value.
+
+###### `value`<sup>Required</sup> <a name="value" id="cdk-glue-job-builder.RepresentNullValue.integer.parameter.value"></a>
+
+- *Type:* number
+
+represent null value.
+
+---
+
+##### `minusOne` <a name="minusOne" id="cdk-glue-job-builder.RepresentNullValue.minusOne"></a>
+
+```typescript
+import { RepresentNullValue } from 'cdk-glue-job-builder'
+
+RepresentNullValue.minusOne()
+```
+
+1 Integer.
+
+##### `nullString` <a name="nullString" id="cdk-glue-job-builder.RepresentNullValue.nullString"></a>
+
+```typescript
+import { RepresentNullValue } from 'cdk-glue-job-builder'
+
+RepresentNullValue.nullString()
+```
+
+"null" String.
+
+##### `string` <a name="string" id="cdk-glue-job-builder.RepresentNullValue.string"></a>
+
+```typescript
+import { RepresentNullValue } from 'cdk-glue-job-builder'
+
+RepresentNullValue.string(value: string)
+```
+
+Create a new {@link RepresentNullValue} from string value.
+
+###### `value`<sup>Required</sup> <a name="value" id="cdk-glue-job-builder.RepresentNullValue.string.parameter.value"></a>
+
+- *Type:* string
+
+represent null value.
+
+---
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#cdk-glue-job-builder.RepresentNullValue.property.type">type</a></code> | <code><a href="#cdk-glue-job-builder.RepresentNullType">RepresentNullType</a></code> | *No description.* |
+| <code><a href="#cdk-glue-job-builder.RepresentNullValue.property.value">value</a></code> | <code>string</code> | *No description.* |
+
+---
+
+##### `type`<sup>Required</sup> <a name="type" id="cdk-glue-job-builder.RepresentNullValue.property.type"></a>
+
+```typescript
+public readonly type: RepresentNullType;
+```
+
+- *Type:* <a href="#cdk-glue-job-builder.RepresentNullType">RepresentNullType</a>
+
+---
+
+##### `value`<sup>Required</sup> <a name="value" id="cdk-glue-job-builder.RepresentNullValue.property.value"></a>
+
+```typescript
+public readonly value: string;
+```
+
+- *Type:* string
+
+---
 
 
 ### S3CatalogSource <a name="S3CatalogSource" id="cdk-glue-job-builder.S3CatalogSource"></a>
@@ -2511,7 +2889,7 @@ The object key.
 
 ### SelectFields <a name="SelectFields" id="cdk-glue-job-builder.SelectFields"></a>
 
-Transform of Select Fields.
+Choose which fields you want from your data.
 
 #### Initializers <a name="Initializers" id="cdk-glue-job-builder.SelectFields.Initializer"></a>
 
@@ -2569,12 +2947,12 @@ Chain from previous node.
 ##### `grant` <a name="grant" id="cdk-glue-job-builder.SelectFields.grant"></a>
 
 ```typescript
-public grant(_grantee: IGrantable): Grant
+public grant(_job: IGrantable): Grant
 ```
 
 Granting Glue job permissions.
 
-###### `_grantee`<sup>Required</sup> <a name="_grantee" id="cdk-glue-job-builder.SelectFields.grant.parameter._grantee"></a>
+###### `_job`<sup>Required</sup> <a name="_job" id="cdk-glue-job-builder.SelectFields.grant.parameter._job"></a>
 
 - *Type:* aws-cdk-lib.aws_iam.IGrantable
 
@@ -2708,6 +3086,7 @@ new Transform()
 | --- | --- |
 | <code><a href="#cdk-glue-job-builder.Transform.applyMapping">applyMapping</a></code> | Create a new {@link ApplyMapping}. |
 | <code><a href="#cdk-glue-job-builder.Transform.dropFields">dropFields</a></code> | Create a new {@link DropFields}. |
+| <code><a href="#cdk-glue-job-builder.Transform.dropNullFields">dropNullFields</a></code> | Create a new {@link DropNullFields}. |
 | <code><a href="#cdk-glue-job-builder.Transform.selectFields">selectFields</a></code> | Create a new {@link SelectFields}. |
 
 ---
@@ -2753,6 +3132,28 @@ Create a new {@link DropFields}.
 ###### `props`<sup>Required</sup> <a name="props" id="cdk-glue-job-builder.Transform.dropFields.parameter.props"></a>
 
 - *Type:* <a href="#cdk-glue-job-builder.DropFieldsProps">DropFieldsProps</a>
+
+---
+
+##### `dropNullFields` <a name="dropNullFields" id="cdk-glue-job-builder.Transform.dropNullFields"></a>
+
+```typescript
+import { Transform } from 'cdk-glue-job-builder'
+
+Transform.dropNullFields(id: string, props: DropNullFieldsProps)
+```
+
+Create a new {@link DropNullFields}.
+
+###### `id`<sup>Required</sup> <a name="id" id="cdk-glue-job-builder.Transform.dropNullFields.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+###### `props`<sup>Required</sup> <a name="props" id="cdk-glue-job-builder.Transform.dropNullFields.parameter.props"></a>
+
+- *Type:* <a href="#cdk-glue-job-builder.DropNullFieldsProps">DropNullFieldsProps</a>
 
 ---
 
@@ -2815,7 +3216,7 @@ The Glue job.
 
 ### INode <a name="INode" id="cdk-glue-job-builder.INode"></a>
 
-- *Implemented By:* <a href="#cdk-glue-job-builder.ApplyMapping">ApplyMapping</a>, <a href="#cdk-glue-job-builder.CatalogSource">CatalogSource</a>, <a href="#cdk-glue-job-builder.CatalogTarget">CatalogTarget</a>, <a href="#cdk-glue-job-builder.DropFields">DropFields</a>, <a href="#cdk-glue-job-builder.NodeBase">NodeBase</a>, <a href="#cdk-glue-job-builder.S3CatalogSource">S3CatalogSource</a>, <a href="#cdk-glue-job-builder.S3CatalogTarget">S3CatalogTarget</a>, <a href="#cdk-glue-job-builder.SelectFields">SelectFields</a>, <a href="#cdk-glue-job-builder.INode">INode</a>
+- *Implemented By:* <a href="#cdk-glue-job-builder.ApplyMapping">ApplyMapping</a>, <a href="#cdk-glue-job-builder.CatalogSource">CatalogSource</a>, <a href="#cdk-glue-job-builder.CatalogTarget">CatalogTarget</a>, <a href="#cdk-glue-job-builder.DropFields">DropFields</a>, <a href="#cdk-glue-job-builder.DropNullFields">DropNullFields</a>, <a href="#cdk-glue-job-builder.NodeBase">NodeBase</a>, <a href="#cdk-glue-job-builder.S3CatalogSource">S3CatalogSource</a>, <a href="#cdk-glue-job-builder.S3CatalogTarget">S3CatalogTarget</a>, <a href="#cdk-glue-job-builder.SelectFields">SelectFields</a>, <a href="#cdk-glue-job-builder.INode">INode</a>
 
 A node of job.
 
@@ -2964,6 +3365,30 @@ public readonly generation: number;
 - *Type:* number
 
 Generation of node.
+
+---
+
+## Enums <a name="Enums" id="Enums"></a>
+
+### RepresentNullType <a name="RepresentNullType" id="cdk-glue-job-builder.RepresentNullType"></a>
+
+Type representing a null value.
+
+#### Members <a name="Members" id="Members"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#cdk-glue-job-builder.RepresentNullType.STRING">STRING</a></code> | *No description.* |
+| <code><a href="#cdk-glue-job-builder.RepresentNullType.INTEGER">INTEGER</a></code> | *No description.* |
+
+---
+
+##### `STRING` <a name="STRING" id="cdk-glue-job-builder.RepresentNullType.STRING"></a>
+
+---
+
+
+##### `INTEGER` <a name="INTEGER" id="cdk-glue-job-builder.RepresentNullType.INTEGER"></a>
 
 ---
 

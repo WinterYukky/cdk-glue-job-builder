@@ -59,10 +59,8 @@ export class CatalogTarget extends NodeBase {
       `    transformation_ctx="${this.nodeId}",`,
       `)`,
     ].join('\n');
-    const parent = this.inputs[0].python();
     return {
-      imports: parent.imports,
-      body: [...parent.body, code],
+      body: [code],
     };
   }
   scala(): CodeFragment {

@@ -130,66 +130,192 @@
         }
       ]
     },
-    "integ:default:assert": {
-      "name": "integ:default:assert",
-      "description": "assert the snapshot of integration test 'default'",
+    "integ:drop-fields:assert": {
+      "name": "integ:drop-fields:assert",
+      "description": "assert the snapshot of integration test 'drop-fields'",
       "steps": [
         {
-          "exec": "[ -d \"test/default.integ.snapshot\" ] || (echo \"No snapshot available for integration test 'default'. Run 'projen integ:default:deploy' to capture.\" && exit 1)"
+          "exec": "[ -d \"test/integ/drop-fields.integ.snapshot\" ] || (echo \"No snapshot available for integration test 'drop-fields'. Run 'projen integ:drop-fields:deploy' to capture.\" && exit 1)"
         },
         {
-          "exec": "cdk synth --app \"ts-node -P tsconfig.dev.json test/default.integ.ts\" --no-version-reporting --no-asset-metadata --no-path-metadata -o test/.tmp/default.integ/assert.cdk.out > /dev/null"
+          "exec": "cdk synth --app \"ts-node -P tsconfig.dev.json test/integ/drop-fields.integ.ts\" --no-version-reporting --no-asset-metadata --no-path-metadata -o test/integ/.tmp/drop-fields.integ/assert.cdk.out > /dev/null"
         },
         {
-          "exec": "diff -r -x asset.* -x cdk.out -x manifest.json -x tree.json test/default.integ.snapshot/ test/.tmp/default.integ/assert.cdk.out/"
+          "exec": "diff -r -x asset.* -x cdk.out -x manifest.json -x tree.json test/integ/drop-fields.integ.snapshot/ test/integ/.tmp/drop-fields.integ/assert.cdk.out/"
         }
       ]
     },
-    "integ:default:deploy": {
-      "name": "integ:default:deploy",
-      "description": "deploy integration test 'default' and capture snapshot",
+    "integ:drop-fields:deploy": {
+      "name": "integ:drop-fields:deploy",
+      "description": "deploy integration test 'drop-fields' and capture snapshot",
       "steps": [
         {
-          "exec": "rm -fr test/.tmp/default.integ/deploy.cdk.out"
+          "exec": "rm -fr test/integ/.tmp/drop-fields.integ/deploy.cdk.out"
         },
         {
-          "exec": "cdk deploy --app \"ts-node -P tsconfig.dev.json test/default.integ.ts\" --no-version-reporting --no-asset-metadata --no-path-metadata '**' --require-approval=never -o test/.tmp/default.integ/deploy.cdk.out"
+          "exec": "cdk deploy --app \"ts-node -P tsconfig.dev.json test/integ/drop-fields.integ.ts\" --no-version-reporting --no-asset-metadata --no-path-metadata '**' --require-approval=never -o test/integ/.tmp/drop-fields.integ/deploy.cdk.out"
         },
         {
-          "exec": "rm -fr test/default.integ.snapshot"
+          "exec": "rm -fr test/integ/drop-fields.integ.snapshot"
         },
         {
-          "exec": "mv test/.tmp/default.integ/deploy.cdk.out test/default.integ.snapshot"
+          "exec": "mv test/integ/.tmp/drop-fields.integ/deploy.cdk.out test/integ/drop-fields.integ.snapshot"
         },
         {
-          "spawn": "integ:default:destroy"
+          "spawn": "integ:drop-fields:destroy"
         }
       ]
     },
-    "integ:default:destroy": {
-      "name": "integ:default:destroy",
-      "description": "destroy integration test 'default'",
+    "integ:drop-fields:destroy": {
+      "name": "integ:drop-fields:destroy",
+      "description": "destroy integration test 'drop-fields'",
       "steps": [
         {
-          "exec": "cdk destroy --app test/default.integ.snapshot '**' --no-version-reporting"
+          "exec": "cdk destroy --app test/integ/drop-fields.integ.snapshot '**' --no-version-reporting"
         }
       ]
     },
-    "integ:default:snapshot": {
-      "name": "integ:default:snapshot",
-      "description": "update snapshot for integration test \"default\"",
+    "integ:drop-fields:snapshot": {
+      "name": "integ:drop-fields:snapshot",
+      "description": "update snapshot for integration test \"drop-fields\"",
       "steps": [
         {
-          "exec": "cdk synth --app \"ts-node -P tsconfig.dev.json test/default.integ.ts\" --no-version-reporting --no-asset-metadata --no-path-metadata -o test/default.integ.snapshot > /dev/null"
+          "exec": "cdk synth --app \"ts-node -P tsconfig.dev.json test/integ/drop-fields.integ.ts\" --no-version-reporting --no-asset-metadata --no-path-metadata -o test/integ/drop-fields.integ.snapshot > /dev/null"
         }
       ]
     },
-    "integ:default:watch": {
-      "name": "integ:default:watch",
-      "description": "watch integration test 'default' (without updating snapshots)",
+    "integ:drop-fields:watch": {
+      "name": "integ:drop-fields:watch",
+      "description": "watch integration test 'drop-fields' (without updating snapshots)",
       "steps": [
         {
-          "exec": "cdk watch --app \"ts-node -P tsconfig.dev.json test/default.integ.ts\" --no-version-reporting --no-asset-metadata --no-path-metadata '**' -o test/.tmp/default.integ/deploy.cdk.out"
+          "exec": "cdk watch --app \"ts-node -P tsconfig.dev.json test/integ/drop-fields.integ.ts\" --no-version-reporting --no-asset-metadata --no-path-metadata '**' -o test/integ/.tmp/drop-fields.integ/deploy.cdk.out"
+        }
+      ]
+    },
+    "integ:drop-null-fields:assert": {
+      "name": "integ:drop-null-fields:assert",
+      "description": "assert the snapshot of integration test 'drop-null-fields'",
+      "steps": [
+        {
+          "exec": "[ -d \"test/integ/drop-null-fields.integ.snapshot\" ] || (echo \"No snapshot available for integration test 'drop-null-fields'. Run 'projen integ:drop-null-fields:deploy' to capture.\" && exit 1)"
+        },
+        {
+          "exec": "cdk synth --app \"ts-node -P tsconfig.dev.json test/integ/drop-null-fields.integ.ts\" --no-version-reporting --no-asset-metadata --no-path-metadata -o test/integ/.tmp/drop-null-fields.integ/assert.cdk.out > /dev/null"
+        },
+        {
+          "exec": "diff -r -x asset.* -x cdk.out -x manifest.json -x tree.json test/integ/drop-null-fields.integ.snapshot/ test/integ/.tmp/drop-null-fields.integ/assert.cdk.out/"
+        }
+      ]
+    },
+    "integ:drop-null-fields:deploy": {
+      "name": "integ:drop-null-fields:deploy",
+      "description": "deploy integration test 'drop-null-fields' and capture snapshot",
+      "steps": [
+        {
+          "exec": "rm -fr test/integ/.tmp/drop-null-fields.integ/deploy.cdk.out"
+        },
+        {
+          "exec": "cdk deploy --app \"ts-node -P tsconfig.dev.json test/integ/drop-null-fields.integ.ts\" --no-version-reporting --no-asset-metadata --no-path-metadata '**' --require-approval=never -o test/integ/.tmp/drop-null-fields.integ/deploy.cdk.out"
+        },
+        {
+          "exec": "rm -fr test/integ/drop-null-fields.integ.snapshot"
+        },
+        {
+          "exec": "mv test/integ/.tmp/drop-null-fields.integ/deploy.cdk.out test/integ/drop-null-fields.integ.snapshot"
+        },
+        {
+          "spawn": "integ:drop-null-fields:destroy"
+        }
+      ]
+    },
+    "integ:drop-null-fields:destroy": {
+      "name": "integ:drop-null-fields:destroy",
+      "description": "destroy integration test 'drop-null-fields'",
+      "steps": [
+        {
+          "exec": "cdk destroy --app test/integ/drop-null-fields.integ.snapshot '**' --no-version-reporting"
+        }
+      ]
+    },
+    "integ:drop-null-fields:snapshot": {
+      "name": "integ:drop-null-fields:snapshot",
+      "description": "update snapshot for integration test \"drop-null-fields\"",
+      "steps": [
+        {
+          "exec": "cdk synth --app \"ts-node -P tsconfig.dev.json test/integ/drop-null-fields.integ.ts\" --no-version-reporting --no-asset-metadata --no-path-metadata -o test/integ/drop-null-fields.integ.snapshot > /dev/null"
+        }
+      ]
+    },
+    "integ:drop-null-fields:watch": {
+      "name": "integ:drop-null-fields:watch",
+      "description": "watch integration test 'drop-null-fields' (without updating snapshots)",
+      "steps": [
+        {
+          "exec": "cdk watch --app \"ts-node -P tsconfig.dev.json test/integ/drop-null-fields.integ.ts\" --no-version-reporting --no-asset-metadata --no-path-metadata '**' -o test/integ/.tmp/drop-null-fields.integ/deploy.cdk.out"
+        }
+      ]
+    },
+    "integ:select-fields:assert": {
+      "name": "integ:select-fields:assert",
+      "description": "assert the snapshot of integration test 'select-fields'",
+      "steps": [
+        {
+          "exec": "[ -d \"test/integ/select-fields.integ.snapshot\" ] || (echo \"No snapshot available for integration test 'select-fields'. Run 'projen integ:select-fields:deploy' to capture.\" && exit 1)"
+        },
+        {
+          "exec": "cdk synth --app \"ts-node -P tsconfig.dev.json test/integ/select-fields.integ.ts\" --no-version-reporting --no-asset-metadata --no-path-metadata -o test/integ/.tmp/select-fields.integ/assert.cdk.out > /dev/null"
+        },
+        {
+          "exec": "diff -r -x asset.* -x cdk.out -x manifest.json -x tree.json test/integ/select-fields.integ.snapshot/ test/integ/.tmp/select-fields.integ/assert.cdk.out/"
+        }
+      ]
+    },
+    "integ:select-fields:deploy": {
+      "name": "integ:select-fields:deploy",
+      "description": "deploy integration test 'select-fields' and capture snapshot",
+      "steps": [
+        {
+          "exec": "rm -fr test/integ/.tmp/select-fields.integ/deploy.cdk.out"
+        },
+        {
+          "exec": "cdk deploy --app \"ts-node -P tsconfig.dev.json test/integ/select-fields.integ.ts\" --no-version-reporting --no-asset-metadata --no-path-metadata '**' --require-approval=never -o test/integ/.tmp/select-fields.integ/deploy.cdk.out"
+        },
+        {
+          "exec": "rm -fr test/integ/select-fields.integ.snapshot"
+        },
+        {
+          "exec": "mv test/integ/.tmp/select-fields.integ/deploy.cdk.out test/integ/select-fields.integ.snapshot"
+        },
+        {
+          "spawn": "integ:select-fields:destroy"
+        }
+      ]
+    },
+    "integ:select-fields:destroy": {
+      "name": "integ:select-fields:destroy",
+      "description": "destroy integration test 'select-fields'",
+      "steps": [
+        {
+          "exec": "cdk destroy --app test/integ/select-fields.integ.snapshot '**' --no-version-reporting"
+        }
+      ]
+    },
+    "integ:select-fields:snapshot": {
+      "name": "integ:select-fields:snapshot",
+      "description": "update snapshot for integration test \"select-fields\"",
+      "steps": [
+        {
+          "exec": "cdk synth --app \"ts-node -P tsconfig.dev.json test/integ/select-fields.integ.ts\" --no-version-reporting --no-asset-metadata --no-path-metadata -o test/integ/select-fields.integ.snapshot > /dev/null"
+        }
+      ]
+    },
+    "integ:select-fields:watch": {
+      "name": "integ:select-fields:watch",
+      "description": "watch integration test 'select-fields' (without updating snapshots)",
+      "steps": [
+        {
+          "exec": "cdk watch --app \"ts-node -P tsconfig.dev.json test/integ/select-fields.integ.ts\" --no-version-reporting --no-asset-metadata --no-path-metadata '**' -o test/integ/.tmp/select-fields.integ/deploy.cdk.out"
         }
       ]
     },
@@ -198,7 +324,13 @@
       "description": "update snapshot for all integration tests",
       "steps": [
         {
-          "spawn": "integ:default:snapshot"
+          "spawn": "integ:drop-fields:snapshot"
+        },
+        {
+          "spawn": "integ:drop-null-fields:snapshot"
+        },
+        {
+          "spawn": "integ:select-fields:snapshot"
         }
       ]
     },
@@ -281,7 +413,13 @@
           "spawn": "eslint"
         },
         {
-          "spawn": "integ:default:assert"
+          "spawn": "integ:drop-fields:assert"
+        },
+        {
+          "spawn": "integ:drop-null-fields:assert"
+        },
+        {
+          "spawn": "integ:select-fields:assert"
         }
       ]
     },
@@ -330,19 +468,19 @@
           "exec": "yarn upgrade npm-check-updates"
         },
         {
-          "exec": "npm-check-updates --dep dev --upgrade --target=minor --reject='aws-cdk-lib,constructs,@aws-cdk/aws-glue-alpha'"
+          "exec": "npm-check-updates --dep dev --upgrade --target=minor --reject='@aws-cdk/aws-glue-alpha,aws-cdk-lib,constructs'"
         },
         {
-          "exec": "npm-check-updates --dep optional --upgrade --target=minor --reject='aws-cdk-lib,constructs,@aws-cdk/aws-glue-alpha'"
+          "exec": "npm-check-updates --dep optional --upgrade --target=minor --reject='@aws-cdk/aws-glue-alpha,aws-cdk-lib,constructs'"
         },
         {
-          "exec": "npm-check-updates --dep peer --upgrade --target=minor --reject='aws-cdk-lib,constructs,@aws-cdk/aws-glue-alpha'"
+          "exec": "npm-check-updates --dep peer --upgrade --target=minor --reject='@aws-cdk/aws-glue-alpha,aws-cdk-lib,constructs'"
         },
         {
-          "exec": "npm-check-updates --dep prod --upgrade --target=minor --reject='aws-cdk-lib,constructs,@aws-cdk/aws-glue-alpha'"
+          "exec": "npm-check-updates --dep prod --upgrade --target=minor --reject='@aws-cdk/aws-glue-alpha,aws-cdk-lib,constructs'"
         },
         {
-          "exec": "npm-check-updates --dep bundle --upgrade --target=minor --reject='aws-cdk-lib,constructs,@aws-cdk/aws-glue-alpha'"
+          "exec": "npm-check-updates --dep bundle --upgrade --target=minor --reject='@aws-cdk/aws-glue-alpha,aws-cdk-lib,constructs'"
         },
         {
           "exec": "yarn install --check-files"

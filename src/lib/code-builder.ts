@@ -1,7 +1,7 @@
 import { Code, CodeConfig, S3Code } from '@aws-cdk/aws-glue-alpha';
 import { Names, RemovalPolicy } from 'aws-cdk-lib';
 import { IGrantable } from 'aws-cdk-lib/aws-iam';
-import { IBucket, Bucket } from 'aws-cdk-lib/aws-s3';
+import { IBucket, Bucket, BlockPublicAccess } from 'aws-cdk-lib/aws-s3';
 import { BucketDeployment, Source } from 'aws-cdk-lib/aws-s3-deployment';
 import { Construct } from 'constructs';
 import { INode } from './node';
@@ -12,12 +12,30 @@ import { INode } from './node';
 export interface CodeFragment {
   /**
    * Import section of CodeFragment.
+   *
+   * @default - No imports.
    */
-  readonly imports: string[];
+  readonly imports?: string[];
   /**
-   * Body section of CodeFragment.
+   * Set the code to be written between the import section and body.
+   * Functions must be defined here.
+   *
+   * @default - No head codes.
+   */
+  readonly head?: string[];
+  /**
+   * The body is output between the head and tail sections.
+   * The ETL is written here.
+   *
+   * @default - No body codes.
    **/
-  readonly body: string[];
+  readonly body?: string[];
+  /**
+   * The tail is output just before job.commit().
+   *
+   * @default - No tail codes.
+   */
+  readonly tail?: string[];
 }
 
 export abstract class CodeBuilderBase extends Code {
@@ -75,6 +93,7 @@ export abstract class CodeBuilderBase extends Code {
     const bucket =
       this.bucket ??
       new Bucket(scope, 'ScriptBucket', {
+        blockPublicAccess: BlockPublicAccess.BLOCK_ALL,
         autoDeleteObjects: true,
         removalPolicy: RemovalPolicy.DESTROY,
       });
@@ -93,32 +112,36 @@ export abstract class CodeBuilderBase extends Code {
  * Build Python code from nodes.
  */
 export class PythonCodeBuilder extends CodeBuilderBase {
+  private readonly core: CodeFragment = {
+    imports: [
+      'import sys',
+      'from awsglue.transforms import *',
+      'from awsglue.utils import getResolvedOptions',
+      'from pyspark.context import SparkContext',
+      'from awsglue.context import GlueContext',
+      'from awsglue.job import Job',
+    ],
+    head: [
+      [
+        `args = getResolvedOptions(sys.argv, ["JOB_NAME"])`,
+        `sc = SparkContext()`,
+        `glueContext = GlueContext(sc)`,
+        `spark = glueContext.spark_session`,
+        `job = Job(glueContext)`,
+        `job.init(args["JOB_NAME"], args)`,
+      ].join('\n'),
+    ],
+    tail: ['job.commit()'],
+  };
   codenize(): string {
-    const codes = this.nodes.map((node) => node.python());
-    codes;
+    const codes = [this.core, ...this.nodes.map((node) => node.python())];
     const imports = Array.from(
-      new Set([
-        'import sys',
-        'from awsglue.transforms import *',
-        'from awsglue.utils import getResolvedOptions',
-        'from pyspark.context import SparkContext',
-        'from awsglue.context import GlueContext',
-        'from awsglue.job import Job',
-        ...codes.flatMap((code) => code.imports),
-      ])
+      new Set(codes.flatMap((code) => code.imports ?? []))
     ).join('\n');
-
-    const begin = [
-      `args = getResolvedOptions(sys.argv, ["JOB_NAME"])`,
-      `sc = SparkContext()`,
-      `glueContext = GlueContext(sc)`,
-      `spark = glueContext.spark_session`,
-      `job = Job(glueContext)`,
-      `job.init(args["JOB_NAME"], args)`,
-    ].join('\n');
-    const body = Array.from(new Set(codes.flatMap((code) => code.body)));
-    const commit = 'job.commit';
-    return [imports, begin, ...body, commit].join('\n\n');
+    const head = Array.from(new Set(codes.flatMap((code) => code.head ?? [])));
+    const body = Array.from(new Set(codes.flatMap((code) => code.body ?? [])));
+    const tail = Array.from(new Set(codes.flatMap((code) => code.tail ?? [])));
+    return [imports, ...head, ...body, ...tail].join('\n\n');
   }
 }
 

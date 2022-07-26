@@ -11,7 +11,7 @@ export interface DropFieldsProps {
    */
   readonly fields: string[];
   /**
-   * Name of node.
+   * The node name.
    *
    * @default 'Drop Fields'
    */
@@ -19,7 +19,7 @@ export interface DropFieldsProps {
 }
 
 /**
- * Transform of Drop Fields.
+ * Remove selected fields from your data.
  */
 export class DropFields extends NodeBase {
   private readonly fields: string[];
@@ -42,16 +42,14 @@ export class DropFields extends NodeBase {
       `    transformation_ctx="${this.nodeId}",`,
       `)`,
     ].join('\n');
-    const parent = this.inputs[0].python();
     return {
-      imports: parent.imports,
-      body: [...parent.body, code],
+      body: [code],
     };
   }
   scala(): CodeFragment {
     throw new Error('Method not implemented.');
   }
-  grant(_grantee: IGrantable): Grant | undefined {
+  grant(_job: IGrantable): Grant | undefined {
     return undefined;
   }
 }

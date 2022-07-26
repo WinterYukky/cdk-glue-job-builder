@@ -1,6 +1,15 @@
 {
   "dependencies": [
     {
+      "name": "@aws-cdk/aws-glue-alpha",
+      "version": "2.33.0-alpha.0",
+      "type": "build"
+    },
+    {
+      "name": "@types/aws-lambda",
+      "type": "build"
+    },
+    {
       "name": "@types/jest",
       "version": "^27",
       "type": "build"
@@ -31,8 +40,16 @@
       "type": "build"
     },
     {
+      "name": "aws-sdk",
+      "type": "build"
+    },
+    {
       "name": "constructs",
       "version": "10.0.5",
+      "type": "build"
+    },
+    {
+      "name": "esbuild",
       "type": "build"
     },
     {

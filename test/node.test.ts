@@ -6,15 +6,10 @@ export class SomeNode extends NodeBase {
     super(id, 'SomeNode');
   }
   python(): CodeFragment {
-    return (
-      this.code ?? {
-        imports: [],
-        body: [],
-      }
-    );
+    return this.code ?? {};
   }
   scala(): CodeFragment {
-    throw new Error('Method not implemented.');
+    throw this.code ?? {};
   }
   grant(_grantee: IGrantable): Grant | undefined {
     throw new Error('Method not implemented.');
