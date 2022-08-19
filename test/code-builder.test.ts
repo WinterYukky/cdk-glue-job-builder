@@ -8,7 +8,7 @@ import { App, Stack } from 'aws-cdk-lib';
 import { Template } from 'aws-cdk-lib/assertions';
 import { IGrantable, Grant } from 'aws-cdk-lib/aws-iam';
 import { Bucket } from 'aws-cdk-lib/aws-s3';
-import { CodeBuilder, CodeBuilderBase } from '../src';
+import { Codenizer, CodenizerBase } from '../src';
 import { SomeNode } from './node.test';
 
 class DummyCodeNode extends SomeNode {
@@ -22,8 +22,8 @@ class DummyCodeNode extends SomeNode {
     return undefined;
   }
 }
-describe('CodeBuilderBase', () => {
-  class SomeCodeBuilder extends CodeBuilderBase {
+describe('CodenizerBase', () => {
+  class SomeCodenizer extends CodenizerBase {
     get nodes() {
       return super.nodes;
     }
@@ -46,15 +46,15 @@ describe('CodeBuilderBase', () => {
     x5y1.to(x4y2).to(x3y3).to(x2y4).to(x1y5);
 
     const expected = [x1y1, x5y1, x2y2, x4y2, x3y3, x2y4, x4y4, x1y5, x5y5];
-    expect(new SomeCodeBuilder(x1y1).nodes).toStrictEqual(expected);
-    expect(new SomeCodeBuilder(x5y1).nodes).toStrictEqual(expected);
-    expect(new SomeCodeBuilder(x2y2).nodes).toStrictEqual(expected);
-    expect(new SomeCodeBuilder(x4y2).nodes).toStrictEqual(expected);
-    expect(new SomeCodeBuilder(x3y3).nodes).toStrictEqual(expected);
-    expect(new SomeCodeBuilder(x2y4).nodes).toStrictEqual(expected);
-    expect(new SomeCodeBuilder(x4y4).nodes).toStrictEqual(expected);
-    expect(new SomeCodeBuilder(x1y5).nodes).toStrictEqual(expected);
-    expect(new SomeCodeBuilder(x5y5).nodes).toStrictEqual(expected);
+    expect(new SomeCodenizer(x1y1).nodes).toStrictEqual(expected);
+    expect(new SomeCodenizer(x5y1).nodes).toStrictEqual(expected);
+    expect(new SomeCodenizer(x2y2).nodes).toStrictEqual(expected);
+    expect(new SomeCodenizer(x4y2).nodes).toStrictEqual(expected);
+    expect(new SomeCodenizer(x3y3).nodes).toStrictEqual(expected);
+    expect(new SomeCodenizer(x2y4).nodes).toStrictEqual(expected);
+    expect(new SomeCodenizer(x4y4).nodes).toStrictEqual(expected);
+    expect(new SomeCodenizer(x1y5).nodes).toStrictEqual(expected);
+    expect(new SomeCodenizer(x5y5).nodes).toStrictEqual(expected);
   });
 
   test('Not provide bucket, create bucket', () => {
@@ -62,7 +62,7 @@ describe('CodeBuilderBase', () => {
     const stack = new Stack(app, 'MyStack');
     new Job(stack, 'Job', {
       executable: JobExecutable.pythonEtl({
-        script: CodeBuilder.python(new DummyCodeNode('node')),
+        script: Codenizer.python(new DummyCodeNode('node')),
         glueVersion: GlueVersion.V3_0,
         pythonVersion: PythonVersion.THREE,
       }),
@@ -79,11 +79,7 @@ describe('CodeBuilderBase', () => {
     });
     new Job(stack, 'Job', {
       executable: JobExecutable.pythonEtl({
-        script: CodeBuilder.python(
-          new DummyCodeNode('node'),
-          bucket,
-          'my-path'
-        ),
+        script: Codenizer.python(new DummyCodeNode('node'), bucket, 'my-path'),
         glueVersion: GlueVersion.V3_0,
         pythonVersion: PythonVersion.THREE,
       }),
@@ -96,14 +92,14 @@ describe('CodeBuilderBase', () => {
   });
 });
 
-describe('PythonCodeBuilder', () => {
+describe('PythonCodenizer', () => {
   test('generate script order by generation', () => {
     const node1 = new DummyCodeNode('node1');
     const node2 = new DummyCodeNode('node2');
     const node3 = new DummyCodeNode('node3');
     const node4 = new SomeNode('node4');
     const node = node3.to(node4).to(node2).to(node1);
-    const script = CodeBuilder.python(node).codenize();
+    const script = Codenizer.python(node).codenize();
     expect(script).toBe(`import sys
 from awsglue.transforms import *
 from awsglue.utils import getResolvedOptions
@@ -139,7 +135,7 @@ job.commit()`);
     const node = node3.to(node2).to(node1);
     new Job(stack, 'Job', {
       executable: JobExecutable.pythonEtl({
-        script: CodeBuilder.python(node),
+        script: Codenizer.python(node),
         glueVersion: GlueVersion.V3_0,
         pythonVersion: PythonVersion.THREE,
       }),
@@ -147,7 +143,7 @@ job.commit()`);
   });
 });
 
-describe('ScalaCodeBuilder', () => {
+describe('ScalaCodenizer', () => {
   test('Scala is not support yet so throw error', () => {
     const app = new App();
     const stack = new Stack(app, 'MyStack');
@@ -159,7 +155,7 @@ describe('ScalaCodeBuilder', () => {
       () =>
         new Job(stack, 'Job', {
           executable: JobExecutable.scalaEtl({
-            script: CodeBuilder.scala(node),
+            script: Codenizer.scala(node),
             glueVersion: GlueVersion.V3_0,
             className: 'GlueApp',
           }),

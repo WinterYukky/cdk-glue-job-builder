@@ -1,5 +1,5 @@
 import { IGrantable, Grant } from 'aws-cdk-lib/aws-iam';
-import { CodeFragment } from '../code-builder';
+import { CodeFragment } from '../codenizer';
 import { NodeBase } from '../node';
 
 /**

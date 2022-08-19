@@ -1,7 +1,7 @@
 import { IDatabase, ITable } from '@aws-cdk/aws-glue-alpha';
 import { IGrantable, Grant } from 'aws-cdk-lib/aws-iam';
 import { IBucket } from 'aws-cdk-lib/aws-s3';
-import { CodeFragment } from './code-builder';
+import { CodeFragment } from './codenizer';
 import { IGranter, NodeBase } from './node';
 
 /**

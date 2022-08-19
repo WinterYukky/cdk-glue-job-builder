@@ -1,7 +1,7 @@
 import * as glue from '@aws-cdk/aws-glue-alpha';
 import { App, Stack } from 'aws-cdk-lib';
 import { Source } from 'aws-cdk-lib/aws-s3-deployment';
-import { CodeBuilder, DataSource, DataTarget, Transform } from '../../src';
+import { Codenizer, DataSource, DataTarget, Transform } from '../../src';
 import { RepresentNullValue } from '../../src/lib/transform/drop-null-fields';
 import { Catalog, JobTest } from './util';
 
@@ -67,7 +67,7 @@ const jobGraph = source.to(dropName).to(target);
 
 const job = new glue.Job(stack, 'Job', {
   executable: glue.JobExecutable.pythonEtl({
-    script: CodeBuilder.python(jobGraph),
+    script: Codenizer.python(jobGraph),
     glueVersion: glue.GlueVersion.V3_0,
     pythonVersion: glue.PythonVersion.THREE,
   }),

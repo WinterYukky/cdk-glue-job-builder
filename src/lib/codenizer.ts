@@ -38,7 +38,7 @@ export interface CodeFragment {
   readonly tail?: string[];
 }
 
-export abstract class CodeBuilderBase extends Code {
+export abstract class CodenizerBase extends Code {
   constructor(
     /**
      * The Node you want to build.
@@ -111,7 +111,7 @@ export abstract class CodeBuilderBase extends Code {
 /**
  * Build Python code from nodes.
  */
-export class PythonCodeBuilder extends CodeBuilderBase {
+export class PythonCodenizer extends CodenizerBase {
   private readonly core: CodeFragment = {
     imports: [
       'import sys',
@@ -149,13 +149,13 @@ export class PythonCodeBuilder extends CodeBuilderBase {
  * Build Scala code from nodes.
  * @todo Scala is not support yet.
  */
-export class ScalaCodeBuilder extends CodeBuilderBase {
+export class ScalaCodenizer extends CodenizerBase {
   codenize(): string {
     throw new Error('Method not implemented.');
   }
 }
 
-export class CodeBuilder {
+export class Codenizer {
   static python(
     /**
      * The Node you want to build.
@@ -174,7 +174,7 @@ export class CodeBuilder {
      */
     objectKey?: string
   ) {
-    return new PythonCodeBuilder(node, bucket, objectKey);
+    return new PythonCodenizer(node, bucket, objectKey);
   }
   static scala(
     /**
@@ -194,6 +194,6 @@ export class CodeBuilder {
      */
     objectKey?: string
   ) {
-    return new ScalaCodeBuilder(node, bucket, objectKey);
+    return new ScalaCodenizer(node, bucket, objectKey);
   }
 }

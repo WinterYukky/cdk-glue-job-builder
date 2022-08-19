@@ -1,5 +1,5 @@
 import { Grant, IGrantable } from 'aws-cdk-lib/aws-iam';
-import { CodeFragment } from './code-builder';
+import { CodeFragment } from './codenizer';
 
 /**
  * A node of job.
